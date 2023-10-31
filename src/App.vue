@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import TheHeader from './components/TheHeader/TheHeader.vue'
-import TheSidebarCompact from './components/TheSidebarCompact/TheSidebarCompact.vue'
-import TheSidebar from './components/TheSidebar/TheSidebar.vue'
-import TheSidebarMobile from './components/TheSidebarMobile/TheSidebarMobile.vue'
-import TheCategories from './components/TheCategories/TheCategories.vue'
-import TheVideos from './components/TheVideos/TheVideos.vue'
+import TheHeader from '@/TheHeader/TheHeader.vue'
+import TheSidebarCompact from '@/TheSidebarCompact/TheSidebarCompact.vue'
+import TheSidebar from '@/TheSidebar/TheSidebar.vue'
+import TheSidebarMobile from '@/TheSidebarMobile/TheSidebarMobile.vue'
+import TheCategories from '@/TheCategories/TheCategories.vue'
+import TheVideos from '@/TheVideos/TheVideos.vue'
 
 export default {
   components: {
