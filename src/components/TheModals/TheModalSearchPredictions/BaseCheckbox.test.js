@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/vue'
 import BaseCheckbox from './BaseCheckbox.vue'
 
-test('renders checked base checkbox with label', () => {
+it('renders checked base checkbox with label', () => {
 
   const label = 'Test Label'
 
@@ -23,7 +23,7 @@ test('renders checked base checkbox with label', () => {
   expect(screen.getByLabelText(label).checked).toBe(true)
 })
 
-test('renders unchecked base checkbox', () => {
+it('renders unchecked base checkbox', () => {
 
   render(BaseCheckbox)
 

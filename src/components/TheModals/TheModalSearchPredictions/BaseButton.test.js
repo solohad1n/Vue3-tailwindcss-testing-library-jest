@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/vue'
 import BaseButton from './BaseButton.vue'
 
-test('renders base button', () => {
+it('renders base button', () => {
   // 1. Подготовка перед тестирование // given (arrange)
   const options = {
     slots: {

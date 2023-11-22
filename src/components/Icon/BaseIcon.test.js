@@ -16,7 +16,7 @@ function renderIcon(name, classes = null) {
   return render(BaseIcon, options)
 }
 
-test('renders icon', () => {
+it('renders icon', () => {
 
   renderIcon(existingIconName)
 
@@ -24,7 +24,7 @@ test('renders icon', () => {
 
 })
 
-test('renders non-existent icon', () => {
+it('renders non-existent icon', () => {
 
   renderIcon(nonExistentIconName)
 
@@ -32,7 +32,7 @@ test('renders non-existent icon', () => {
 
 })
 
-test('renders icon with default classes', () => {
+it('renders icon with default classes', () => {
 
   const defaultClasses = 'w-6 h-6'
 
@@ -42,7 +42,7 @@ test('renders icon with default classes', () => {
 
 })
 
-test('renders icon with custom classes', () => {
+it('renders icon with custom classes', () => {
 
   const classes = 'w-10 h-10'
 

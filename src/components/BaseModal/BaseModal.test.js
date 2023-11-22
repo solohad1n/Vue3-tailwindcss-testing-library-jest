@@ -19,7 +19,7 @@ function assetrModalClose(body) {
   return waitForElementToBeRemoved([screen.queryByText(body), screen.queryByTestId('base-modal-overlay')])
 }
 
-test('renders modal with body and footer', () => {
+it('renders modal with body and footer', () => {
 
   const body = 'This is modal body'
   const footer = 'This is modal footer'
@@ -30,7 +30,7 @@ test('renders modal with body and footer', () => {
   screen.getByText(footer)
 })
 
-test('renders modal with close button', () => {
+it('renders modal with close button', () => {
 
   const withCloseButton = true
 
@@ -39,7 +39,7 @@ test('renders modal with close button', () => {
   expect(screen.getByTestId('base-icon').innerHTML).toBe(icons['x'])
 })
 
-test('renders modal without close button', () => {
+it('renders modal without close button', () => {
 
   const withCloseButton = false
 
@@ -48,7 +48,7 @@ test('renders modal without close button', () => {
   expect(screen.queryByTestId('base-icon')).toBeNull()
 })
 
-test('closes modal when clicking close button', async () => {
+it('closes modal when clicking close button', async () => {
 
   const body = 'This is modal body'
 
@@ -72,7 +72,7 @@ test('closes modal when clicking close button', async () => {
   expect(screen.queryByTestId('base-modal-overlay')).toBeNull()
 })
 
-test('closes modal when clicking overlay', () => {
+it('closes modal when clicking overlay', () => {
 
   const body = 'This is modal body'
 
@@ -83,7 +83,7 @@ test('closes modal when clicking overlay', () => {
   return assetrModalClose(body)
 })
 
-test('closes modal when clicking cancel button in the footer', () => {
+it('closes modal when clicking cancel button in the footer', () => {
 
   const body = 'This is modal body'
 
@@ -100,7 +100,7 @@ test('closes modal when clicking cancel button in the footer', () => {
   return assetrModalClose(body)
 })
 
-test('closes modal when pressing esc key', () => {
+it('closes modal when pressing esc key', () => {
 
   const body = 'This is modal body'
 
