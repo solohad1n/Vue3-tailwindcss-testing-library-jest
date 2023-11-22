@@ -28,9 +28,9 @@
 
 <script>
 import BaseButton from './BaseButton.vue'
-import BaseModal from '@/BaseModal/BaseModal.vue'
+import BaseModal from '../../BaseModal/BaseModal.vue'
 import BaseTextarea from './BaseTextarea.vue'
-import TheSearchPredictionsList from '@/TheModals/TheModalSearchPredictions/TheSearchPredictionsList.vue'
+import TheSearchPredictionsList from '../../TheModals/TheModalSearchPredictions/TheSearchPredictionsList.vue'
 import TheSearchPredictionCategories from './TheSearchPredictionCategories.vue'
 
 export default {
