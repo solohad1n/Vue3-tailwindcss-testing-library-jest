@@ -1,16 +1,24 @@
 import { render, screen } from '@testing-library/vue'
 import BaseIcon from './BaseIcon.vue'
-import iconc from '../../icons'
+import icons from '../../icons'
 
-test('renders icon', () => {
+const existingIconName = Object.keys(icons)[0]
+const nonExistentIconName = 'nonExistentIcon'
 
+function renderIcon(name, classes = null) {
   const options = {
     props: {
-      name: Object.keys(iconc)[0]
+      name,
+      class: classes
     }
   }
 
-  render(BaseIcon, options)
+  return render(BaseIcon, options)
+}
+
+test('renders icon', () => {
+
+  renderIcon(existingIconName)
 
   expect(screen.getByTestId('base-icon').innerHTML).toBeTruthy()
 
@@ -18,14 +26,27 @@ test('renders icon', () => {
 
 test('renders non-existent icon', () => {
 
-  const options = {
-    props: {
-      name: 'non-existent'
-    }
-  }
-
-  render(BaseIcon, options)
+  renderIcon(nonExistentIconName)
 
   expect(screen.getByTestId('base-icon').innerHTML).toBeFalsy()
 
+})
+
+test('renders icon with default classes', () => {
+
+  const defaultClasses = 'w-6 h-6'
+
+  renderIcon(existingIconName)
+
+  expect(screen.getByTestId('base-icon').getAttribute('class')).toBe(defaultClasses)
+
+})
+
+test('renders icon with custom classes', () => {
+
+  const classes = 'w-10 h-10'
+
+  renderIcon(existingIconName, classes)
+
+  expect(screen.getByTestId('base-icon').getAttribute('class')).toBe(classes)
 })
