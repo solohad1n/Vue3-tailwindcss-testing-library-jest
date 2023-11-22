@@ -2,39 +2,48 @@ import { render, screen, fireEvent, waitFor, waitForElementToBeRemoved } from '@
 import BaseModal from './BaseModal.vue'
 import icons from '../../icons'
 
-
-test('renders modal with body and footer', () => {
-
-  const body = 'This is modal body'
-  const footer = 'This is modal footer'
+function renderModal(body = '', footer = '', withCloseButton = false){
   const options = {
+    props: {
+      withCloseButton
+    },
     slots: {
       default: body,
       footer
     }
   }
+  return render(BaseModal, options)
+}
 
-  render(BaseModal, options)
+function assetrModalClose(body) {
+  return waitForElementToBeRemoved([screen.queryByText(body), screen.queryByTestId('base-modal-overlay')])
+}
+
+test('renders modal with body and footer', () => {
+
+  const body = 'This is modal body'
+  const footer = 'This is modal footer'
+
+  renderModal(body, footer)
 
   screen.getByText(body)
   screen.getByText(footer)
 })
 
 test('renders modal with close button', () => {
-  const options = {
-    props: {
-      withCloseButton: true
-    }
-  }
 
-  render(BaseModal, options)
+  const withCloseButton = true
+
+  renderModal('', '', withCloseButton)
 
   expect(screen.getByTestId('base-icon').innerHTML).toBe(icons['x'])
 })
 
 test('renders modal without close button', () => {
 
-  render(BaseModal)
+  const withCloseButton = false
+
+  renderModal('', '', withCloseButton)
 
   expect(screen.queryByTestId('base-icon')).toBeNull()
 })
@@ -43,19 +52,9 @@ test('closes modal when clicking close button', async () => {
 
   const body = 'This is modal body'
 
-  const options = {
-    slots: {
-      default: body
-    },
-    props: {
-      withCloseButton: true
-    }
-  }
+  const withCloseButton = true
 
-  
-  render(BaseModal, options)
-  
-  screen.getByText(body)
+  renderModal(body, '', withCloseButton)
 
   await fireEvent.click(screen.getByTestId('base-modal-button-close'))
 
@@ -73,64 +72,41 @@ test('closes modal when clicking close button', async () => {
   expect(screen.queryByTestId('base-modal-overlay')).toBeNull()
 })
 
-test('closes modal when clicking overlay', async () => {
+test('closes modal when clicking overlay', () => {
 
   const body = 'This is modal body'
 
-  const options = {
-    slots: {
-      default: body
-    }
-  }
-
-  render(BaseModal, options)
-
-  screen.getByText(body)
+  renderModal(body)
 
   fireEvent.click(screen.getByTestId('base-modal-overlay'))
 
-  await waitForElementToBeRemoved([screen.queryByText(body), screen.queryByTestId('base-modal-overlay')])
+  return assetrModalClose(body)
 })
 
-test('closes modal when clicking cancel button in the footer', async () => {
+test('closes modal when clicking cancel button in the footer', () => {
 
   const body = 'This is modal body'
 
-  const options = {
-    slots: {
-      default: body,
-      footer: `
+  const footer = `
       <template #footer="{ close }">
         <button @click="close">Cancel</button>
       </template>
       `
-    }
-  }
 
-  render(BaseModal, options)
-
-  screen.getByText(body)
+  renderModal(body, footer)
 
   fireEvent.click(screen.getByRole('button', {name: 'Cancel'}))
 
-  await waitForElementToBeRemoved([screen.queryByText(body), screen.queryByTestId('base-modal-overlay')])
+  return assetrModalClose(body)
 })
 
-test('closes modal when pressing esc key', async () => {
+test('closes modal when pressing esc key', () => {
 
   const body = 'This is modal body'
 
-  const options = {
-    slots: {
-      default: body
-    }
-  }
-
-  render(BaseModal, options)
-
-  screen.getByText(body)
+  renderModal(body)
 
   fireEvent.keyDown(screen.getByRole('dialog'), {key: 'Esc'})
 
-  await waitForElementToBeRemoved([screen.queryByText(body), screen.queryByTestId('base-modal-overlay')])
+  return assetrModalClose(body)
 })
