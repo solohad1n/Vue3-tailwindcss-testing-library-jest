@@ -36,7 +36,8 @@ it('renders modal with close button', () => {
 
   renderModal('', '', withCloseButton)
 
-  expect(screen.getByTestId('base-icon').innerHTML).toBe(icons['x'])
+  // expect(screen.getByTestId('base-icon').innerHTML).toBe(icons['x'])
+  expect(screen.getByTestId('base-icon')).toContainHTML(icons['x'])
 })
 
 it('renders modal without close button', () => {
@@ -45,7 +46,8 @@ it('renders modal without close button', () => {
 
   renderModal('', '', withCloseButton)
 
-  expect(screen.queryByTestId('base-icon')).toBeNull()
+  // expect(screen.queryByTestId('base-icon')).toBeNull()
+  expect(screen.queryByTestId('base-icon')).not.toBeInTheDocument()
 })
 
 it('closes modal when clicking close button', async () => {

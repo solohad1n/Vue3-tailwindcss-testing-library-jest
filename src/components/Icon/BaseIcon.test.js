@@ -20,16 +20,16 @@ it('renders icon', () => {
 
   renderIcon(existingIconName)
 
-  expect(screen.getByTestId('base-icon').innerHTML).toBeTruthy()
-
+  // expect(screen.getByTestId('base-icon').innerHTML).toBeTruthy()
+  expect(screen.getByTestId('base-icon')).not.toBeEmptyDOMElement()
 })
 
 it('renders non-existent icon', () => {
 
   renderIcon(nonExistentIconName)
 
-  expect(screen.getByTestId('base-icon').innerHTML).toBeFalsy()
-
+  // expect(screen.getByTestId('base-icon').innerHTML).toBeFalsy()
+  expect(screen.getByTestId('base-icon')).toBeEmptyDOMElement()
 })
 
 it('renders icon with default classes', () => {
@@ -38,8 +38,8 @@ it('renders icon with default classes', () => {
 
   renderIcon(existingIconName)
 
-  expect(screen.getByTestId('base-icon').getAttribute('class')).toBe(defaultClasses)
-
+  // expect(screen.getByTestId('base-icon').getAttribute('class')).toBe(defaultClasses)
+  expect(screen.getByTestId('base-icon')).toHaveClass(defaultClasses)
 })
 
 it('renders icon with custom classes', () => {
@@ -48,5 +48,6 @@ it('renders icon with custom classes', () => {
 
   renderIcon(existingIconName, classes)
 
-  expect(screen.getByTestId('base-icon').getAttribute('class')).toBe(classes)
+  // expect(screen.getByTestId('base-icon').getAttribute('class')).toBe(classes)
+  expect(screen.getByTestId('base-icon')).toHaveClass(classes)
 })

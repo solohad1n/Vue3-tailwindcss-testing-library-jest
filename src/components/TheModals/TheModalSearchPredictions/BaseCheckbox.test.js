@@ -20,12 +20,14 @@ it('renders checked base checkbox with label', () => {
 
   render(BaseCheckbox, options)
 
-  expect(screen.getByLabelText(label).checked).toBe(true)
+  // expect(screen.getByLabelText(label).checked).toBe(true)
+  expect(screen.getByLabelText(label)).toBeChecked()
 })
 
 it('renders unchecked base checkbox', () => {
 
   render(BaseCheckbox)
 
-  expect(screen.getByRole('checkbox').checked).toBe(false)
+  // expect(screen.getByRole('checkbox').checked).toBe(false)
+  expect(screen.getByRole('checkbox')).not.toBeChecked()
 })
