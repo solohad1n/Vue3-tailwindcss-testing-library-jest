@@ -69,27 +69,24 @@ describe('showing', () => {
 })
 
 describe('hiding', () => {
-  it('hides after moving cursor away from owning element', async () => {
+
+  beforeEach(async () => {
     renderTooltip(text, button)
   
     await hoverOverOwningElement()
   
     assertTooltipShown()
-  
-    await moveCursorAwayFromOwningElement()
-  
+  })
+
+  afterEach(() => {
     assertTooltipHidden()
+  })
+
+  it('hides after moving cursor away from owning element', async () => {
+    await moveCursorAwayFromOwningElement()
   })
   
   it('hides after clicking owning element', async () => {
-    renderTooltip(text, button)
-  
-    await hoverOverOwningElement()
-  
-    assertTooltipShown()
-  
     await clickOwningElement()
-  
-    assertTooltipHidden()
   })
 })
