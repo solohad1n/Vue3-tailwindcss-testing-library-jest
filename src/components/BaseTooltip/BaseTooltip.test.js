@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/vue'
+import userEvent from '@testing-library/user-event'
 import BaseTooltip from './BaseTooltip.vue'
 
 const text = 'Tooltip text'
@@ -27,7 +28,8 @@ function moveCursorAwayFromOwningElement() {
 }
 
 function clickOwningElement() {
-  return fireEvent.click(getOwningElement())
+  const user = userEvent.setup()
+  return user.click(getOwningElement())
 }
 
 function getOwningElement() {
@@ -78,15 +80,26 @@ describe('hiding', () => {
     assertTooltipShown()
   })
 
-  afterEach(() => {
-    assertTooltipHidden()
-  })
+  // afterEach(() => {
+  //   assertTooltipHidden()
+  // })
 
   it('hides after moving cursor away from owning element', async () => {
     await moveCursorAwayFromOwningElement()
+
+    assertTooltipHidden()
   })
   
   it('hides after clicking owning element', async () => {
     await clickOwningElement()
+
+    assertTooltipHidden()
+  })
+
+  it('hides after clicking owning element', async () => {
+
+    await clickOwningElement()
+
+    assertTooltipHidden()
   })
 })
