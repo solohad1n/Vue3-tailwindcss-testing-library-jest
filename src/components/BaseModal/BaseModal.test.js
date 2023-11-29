@@ -1,8 +1,12 @@
-import { render, screen, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/vue'
+import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/vue'
+import userEvent from '@testing-library/user-event'
 import BaseModal from './BaseModal.vue'
 import icons from '../../icons'
 
-function renderModal(body = '', footer = '', withCloseButton = false){
+const user = userEvent.setup()
+const body = 'This is body'
+
+function renderModal(body = '', footer = '', withCloseButton = false) {
   const options = {
     props: {
       withCloseButton
@@ -12,11 +16,15 @@ function renderModal(body = '', footer = '', withCloseButton = false){
       footer
     }
   }
+
   return render(BaseModal, options)
 }
 
 function assetrModalClose(body) {
-  return waitForElementToBeRemoved([screen.queryByText(body), screen.queryByTestId('base-modal-overlay')])
+  return waitForElementToBeRemoved([
+    screen.queryByText(body),
+    screen.queryByTestId('base-modal-overlay')
+  ])
 }
 
 it('renders modal with body and footer', () => {
@@ -58,7 +66,7 @@ it('closes modal when clicking close button', async () => {
 
   renderModal(body, '', withCloseButton)
 
-  await fireEvent.click(screen.getByTestId('base-modal-button-close'))
+  await user.click(screen.getByTestId('base-modal-button-close'))
 
   //await waitFor(() => {
   //   expect(screen.queryByText(body)).toBeNull()
@@ -80,7 +88,7 @@ it('closes modal when clicking overlay', () => {
 
   renderModal(body)
 
-  fireEvent.click(screen.getByTestId('base-modal-overlay'))
+  user.click(screen.getByTestId('base-modal-overlay'))
 
   return assetrModalClose(body)
 })
@@ -97,18 +105,17 @@ it('closes modal when clicking cancel button in the footer', () => {
 
   renderModal(body, footer)
 
-  fireEvent.click(screen.getByRole('button', {name: 'Cancel'}))
+  user.click(screen.getByRole('button', {name: 'Cancel'}))
 
   return assetrModalClose(body)
 })
 
 it('closes modal when pressing esc key', () => {
 
-  const body = 'This is modal body'
-
   renderModal(body)
 
-  fireEvent.keyDown(screen.getByRole('dialog'), {key: 'Esc'})
+  screen.getByRole('dialog').focus()
+  user.keyboard('{Escape}')
 
   return assetrModalClose(body)
 })
