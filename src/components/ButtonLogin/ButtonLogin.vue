@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import BaseIcon from '@/Icon/BaseIcon.vue'
+import BaseIcon from '../Icon/BaseIcon.vue'
 
 export default {
   components: {

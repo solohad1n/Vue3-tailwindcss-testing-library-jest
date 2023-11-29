@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `"<a href=\\"#\\" class=\\"px-3 py-1 transition rounded-full border border-gray-300 bg-gray-100 hover:bg-gray-200\\">category</a>"`;
+
+exports[`renders with label 1`] = `"<a href=\\"#\\" class=\\"px-3 py-1 transition rounded-full border border-gray-300 bg-gray-100 hover:bg-gray-200\\">category</a>"`;
